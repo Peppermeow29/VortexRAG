@@ -68,7 +68,7 @@
 
 ### Prerequisites
 
-- Python 3.11 or higher
+- Python 3.11 or 3.12
 - Node.js 18+ (for frontend development)
 - Git
 
@@ -79,14 +79,19 @@
 git clone https://github.com/Peppermeow29/VortexRAG.git
 cd VortexRAG
 
-# Install Python dependencies
+# Create virtual environment (recommended)
+python3 -m venv venv
+source venv/bin/activate  # macOS/Linux
+# or: venv\Scripts\activate  # Windows
+
+# Install VortexRAG
 pip install -e .
 
-# (Optional) Install frontend dependencies for development
-cd ui/frontend
-npm install
-cd ../..
+# Verify installation
+vortexrag --help
 ```
+
+**📖 For detailed installation instructions, see [INSTALLATION.md](INSTALLATION.md)**
 
 ### Launch the Web UI
 
@@ -110,6 +115,12 @@ vortexrag run examples/RAG.yaml examples/parameter/RAG_parameter.yaml --is_demo
 ---
 
 ## 📖 Documentation
+
+### 📚 Complete Guides
+
+- **[Installation Guide](INSTALLATION.md)** - Detailed installation and configuration
+- **[Setup Guide](LOGO_AND_SETUP_GUIDE.md)** - Repository setup and branding
+- **[Rebranding Summary](REBRANDING_SUMMARY.md)** - Changes from UltraRAG
 
 ### Configuration
 

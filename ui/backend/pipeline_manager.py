@@ -212,7 +212,7 @@ def _make_unique_display(name: str, taken: set[str]) -> str:
 def _extract_display_name_from_desc(desc: str, fallback: str) -> str:
     """Extract display name from Milvus collection description.
 
-    Expected format: 'UltraRAG KB | display_name=<original_name>'
+    Expected format: 'VortexRAG KB | display_name=<original_name>'
 
     Args:
         desc: Collection description string
