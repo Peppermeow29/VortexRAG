@@ -320,7 +320,20 @@ async function onSend() {
         const m = s?.messages.find(m => m.id === aMsgId)
         if (m) { const step = [...(m.steps ?? [])].reverse().find(st => st.name === name); if (step) { step.output = output; step.done = true } }
       },
-      onFinal() { chatStore.updateMessage(chatSid, aMsgId, { isStreaming: false }); chatStore.isStreaming = false; scrollToBottom() },
+      onFinal(data) {
+        console.log('[ChatMainView] onFinal called with data:', data)
+        // Update message with final answer if provided
+        const updates = { isStreaming: false }
+        if (data?.answer) {
+          console.log('[ChatMainView] Setting answer content, length:', data.answer.length)
+          updates.content = data.answer
+        } else {
+          console.warn('[ChatMainView] No answer in final data')
+        }
+        chatStore.updateMessage(chatSid, aMsgId, updates)
+        chatStore.isStreaming = false
+        scrollToBottom()
+      },
       onError(msg) {
         // Detect session expiry (backend restart wiped SESSION_MANAGER)
         const isSessionError = /session/i.test(msg) || /not found/i.test(msg) || /expired/i.test(msg)

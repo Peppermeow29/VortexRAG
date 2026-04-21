@@ -967,9 +967,13 @@ def chat_demo_stream(
 
             # Resolve Answer
             final_ans = _extract_result(res)
+            LOGGER.info(f"[run_bg] final_ans from _extract_result: {final_ans[:200] if final_ans and len(final_ans) > 200 else final_ans}")
+
             mem_ans, mem_file = _find_memory_answer(name, before_memory)
+            LOGGER.info(f"[run_bg] mem_ans from _find_memory_answer: {mem_ans[:200] if mem_ans and len(mem_ans) > 200 else mem_ans}")
 
             answer = final_ans or mem_ans or "No answer generated"
+            LOGGER.info(f"[run_bg] Final answer preview: {answer[:200] if len(answer) > 200 else answer}")
 
             # Update conversation history (first turn)
             session.add_to_history("user", question)
@@ -1236,9 +1240,17 @@ def _extract_result(res: Any) -> Optional[str]:
     if not res:
         return None
 
+    # Debug logging
+    LOGGER.info(f"[_extract_result] res type: {type(res)}")
+    if isinstance(res, dict):
+        LOGGER.info(f"[_extract_result] res keys: {list(res.keys())}")
+
     # 1. If res is wrapped dictionary returned by execute_pipeline (return_all=True)
     if isinstance(res, dict) and "final_result" in res:
         target = res["final_result"]
+        LOGGER.info(f"[_extract_result] target type: {type(target)}")
+        if isinstance(target, str):
+            LOGGER.info(f"[_extract_result] target preview: {target[:200] if len(target) > 200 else target}")
     else:
         target = res
 
@@ -1257,17 +1269,22 @@ def _extract_result(res: Any) -> Optional[str]:
         if isinstance(target, str):
             try:
                 parsed = json.loads(target)
-                if isinstance(parsed, dict) and "ans_ls" in parsed:
-                    val = parsed["ans_ls"][0]
-                    return str(val) if not isinstance(val, str) else val
+                if isinstance(parsed, dict):
+                    # Check for ans_ls or memory_final_survey_ls
+                    for key in ["ans_ls", "memory_final_survey_ls"]:
+                        if key in parsed:
+                            val = parsed[key][0]
+                            return str(val) if not isinstance(val, str) else val
             except Exception:
                 return target
 
         # Case B: target is already Dict
         if isinstance(target, dict):
-            if "ans_ls" in target:
-                val = target["ans_ls"][0]
-                return str(val) if not isinstance(val, str) else val
+            # Check for ans_ls or memory_final_survey_ls
+            for key in ["ans_ls", "memory_final_survey_ls"]:
+                if key in target:
+                    val = target[key][0]
+                    return str(val) if not isinstance(val, str) else val
             # Handle root (Pydantic RootModel dump result may be in root field)
             if "root" in target and isinstance(target["root"], str):
                 return target["root"]
@@ -1277,8 +1294,11 @@ def _extract_result(res: Any) -> Optional[str]:
             text = target.content[0].text
             try:
                 parsed = json.loads(text)
-                val = parsed.get("ans_ls", [""])[0]
-                return str(val) if not isinstance(val, str) else val
+                # Check for ans_ls or memory_final_survey_ls
+                for key in ["ans_ls", "memory_final_survey_ls"]:
+                    if key in parsed:
+                        val = parsed[key][0]
+                        return str(val) if not isinstance(val, str) else val
             except Exception:
                 return text
 
@@ -1292,21 +1312,27 @@ def _extract_result(res: Any) -> Optional[str]:
 def _find_memory_answer(name: str, before: set[str]):
     files = sorted(OUTPUT_DIR.glob(f"memory_*_{name}_*.json"))
     candidates = [p for p in files if str(p) not in before]
+    LOGGER.info(f"[_find_memory_answer] Found {len(candidates)} new memory files for {name}")
     if not candidates:
         return None, None
     target = max(candidates, key=lambda p: p.stat().st_mtime)
+    LOGGER.info(f"[_find_memory_answer] Using memory file: {target}")
 
     try:
         data = json.loads(target.read_text(encoding="utf-8"))
         if data:
             last_mem = data[-1].get("memory", {})
-            # Simple heuristic
-            for k in ["ans_ls", "pred_ls", "result", "answer"]:
+            LOGGER.info(f"[_find_memory_answer] last_mem keys: {list(last_mem.keys())}")
+            # Simple heuristic - check common output keys
+            for k in ["ans_ls", "memory_final_survey_ls", "pred_ls", "result", "answer"]:
                 if k in last_mem:
                     val = last_mem[k]
-                    return (
+                    LOGGER.info(f"[_find_memory_answer] Found key '{k}' with value type: {type(val)}")
+                    result = (
                         str(val[0]) if isinstance(val, list) and val else str(val)
-                    ), target
+                    )
+                    LOGGER.info(f"[_find_memory_answer] Extracted result preview: {result[:200] if len(result) > 200 else result}")
+                    return result, target
     except Exception:
         pass
     return None, target

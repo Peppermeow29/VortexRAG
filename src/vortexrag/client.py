@@ -1368,12 +1368,12 @@ def _summarize_step_result(step_name: str, result: Any) -> str:
 
             return summary.strip()
 
-        if "generate" in step_name.lower():
-            if "ans_ls" in data and data["ans_ls"]:
-                full_text = data["ans_ls"][0]
-                if len(full_text) > 500:
-                    return f"Generated:\n{full_text[:500]}...\n"
-                return f"Generated:\n{full_text}"
+        # Check if this is a generation step or any step that outputs ans_ls
+        if "ans_ls" in data and data["ans_ls"]:
+            full_text = data["ans_ls"][0]
+            if len(full_text) > 500:
+                return f"Generated:\n{full_text[:500]}...\n"
+            return f"Generated:\n{full_text}"
 
         keys = list(data.keys())
         return f"Output Keys: {keys}"
