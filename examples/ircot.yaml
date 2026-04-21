@@ -1,0 +1,35 @@
+# IRCoT Demo
+
+# MCP Server
+servers:
+  benchmark: servers/benchmark
+  generation: servers/generation
+  retriever: servers/retriever
+  prompt: servers/prompt
+  evaluation: servers/evaluation
+  router: servers/router
+  custom: servers/custom
+
+# MCP Client Pipeline
+pipeline:
+- benchmark.get_data
+- retriever.retriever_init
+- generation.generation_init
+- loop:
+    times: 2
+    steps:
+    - retriever.retriever_search
+    - prompt.ircot_next_prompt
+    - generation.generate
+    - branch:
+        router:
+        - router.ircot_check_end
+        branches:
+          incomplete:
+          - custom.ircot_get_first_sent
+          complete: []
+- retriever.retriever_search
+- prompt.ircot_next_prompt
+- generation.generate
+- custom.ircot_extract_ans
+- evaluation.evaluate

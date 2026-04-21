@@ -1,0 +1,37 @@
+# Search-R1 Demo
+
+# MCP Server
+servers:
+  benchmark: servers/benchmark
+  generation: servers/generation
+  retriever: servers/retriever
+  prompt: servers/prompt
+  evaluation: servers/evaluation
+  router: servers/router
+  custom: servers/custom
+
+# MCP Client Pipeline
+pipeline:
+- benchmark.get_data
+- retriever.retriever_init
+- generation.generation_init
+- prompt.qa_boxed
+- generation.generate
+- loop:
+    times: 5
+    steps:
+    - branch:
+        router:
+        - router.search_r1_check
+        branches:
+          incomplete:
+          - custom.search_r1_query_extract
+          - retriever.retriever_search:
+              input:
+                query_list: extract_query_list
+          - prompt.search_r1_gen
+          - generation.generate
+          complete: []
+- evaluation.evaluate:
+    input:
+      pred_ls: ans_ls

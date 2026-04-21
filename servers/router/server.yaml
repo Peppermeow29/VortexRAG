@@ -1,0 +1,67 @@
+path: servers/router/src/router.py
+parameter: servers/router/parameter.yaml
+tools:
+  route1:
+    input:
+      query_list: query_list
+    output:
+    - query_list
+  route2:
+    input:
+      query_list: query_list
+    output:
+    - query_list
+  ircot_check_end:
+    input:
+      ans_ls: ans_ls
+    output:
+    - ans_ls
+  search_r1_check:
+    input:
+      ans_ls: ans_ls
+    output:
+    - ans_ls
+  webnote_check_page:
+    input:
+      page_ls: page_ls
+    output:
+    - page_ls
+  r1_searcher_check:
+    input:
+      ans_ls: ans_ls
+    output:
+    - ans_ls
+  search_o1_check:
+    input:
+      ans_ls: ans_ls
+      q_ls: q_ls
+      total_subq_list: total_subq_list
+      total_reason_list: total_reason_list
+      total_final_info_list: total_final_info_list
+    output:
+    - ans_ls
+    - q_ls
+    - total_subq_list
+    - total_reason_list
+    - total_final_info_list
+  check_model_state:
+    input:
+      ans_ls: ans_ls
+    output:
+    - ans_ls
+  surveycpm_state_router:
+    input:
+      state_ls: state_ls
+      cursor_ls: cursor_ls
+      survey_ls: survey_ls
+      step_ls: step_ls
+      extend_time_ls: extend_time_ls
+      extend_result_ls: extend_result_ls
+    output:
+    - state_ls
+    - cursor_ls
+    - survey_ls
+    - step_ls
+    - extend_time_ls
+    - extend_result_ls
+prompts: {}

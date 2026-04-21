@@ -1,0 +1,94 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vortexrag"
+version = "0.3.0"
+description = "VortexRAG: Advanced RAG Framework (forked from UltraRAG)"
+readme = "README.md"
+requires-python = ">=3.11, <3.13"
+dependencies = [
+    "fastmcp==2.14.5",
+    "mcp",
+    "rich",
+    "pandas",
+    "Jinja2",
+    "openai",
+    "httpx[socks]",
+    "python-dotenv",
+    "PyYAML",
+    "tqdm",
+    "requests",
+    "orjson",
+    "tabulate",
+    "aiohttp",
+    "pillow",
+    "flask",
+    "numpy",
+    "fakeredis",
+    "pymilvus",
+    "pypinyin",
+    "charset-normalizer",
+    "python-docx",
+    "pymupdf",
+    "chonkie",
+    "tiktoken",
+]
+
+[project.optional-dependencies]
+retriever = [
+    "infinity-emb",
+    "sentence-transformers",
+    "openai",
+    "bm25s",
+    "faiss-gpu-cu12",
+    "exa_py",
+    "tavily-python",
+    "pymilvus",
+    "numba",
+    "torch",
+    "fastapi",
+    "uvicorn",
+    "pydantic",
+]
+
+generation = [
+    "vllm>=0.13.0",
+    "openai",
+    "transformers",
+    "torch",
+]
+
+evaluation = [
+    "rouge-score",
+    "pytrec-eval-terrier",
+]
+
+corpus = [
+    "mineru[core]",
+]
+
+all = [
+    "vortexrag[retriever]",
+    "vortexrag[generation]",
+    "vortexrag[corpus]",
+    "vortexrag[evaluation]",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.scripts]
+vortexrag = "vortexrag.client:main"
+
+[dependency-groups]
+dev = [
+    "ruff",
+    "ipython",
+    "jupyter",
+    "pytest",
+]
+
+[tool.uv]
+package = true

@@ -1,0 +1,32 @@
+path: servers/generation/src/generation.py
+parameter: servers/generation/parameter.yaml
+tools:
+  generation_init:
+    input:
+      backend_configs: $backend_configs
+      sampling_params: $sampling_params
+      extra_params: $extra_params
+      backend: $backend
+  generate:
+    input:
+      prompt_ls: prompt_ls
+      system_prompt: $system_prompt
+    output:
+    - ans_ls
+  multimodal_generate:
+    input:
+      multimodal_path: multimodal_path
+      prompt_ls: prompt_ls
+      system_prompt: $system_prompt
+      image_tag: $image_tag
+    output:
+    - ans_ls
+  multiturn_generate:
+    input:
+      messages: messages
+      system_prompt: $system_prompt
+    output:
+    - ans_ls
+  vllm_shutdown:
+    input: {}
+prompts: {}

@@ -1,0 +1,10 @@
+# Multi-turn Chat Pipeline for UltraRAG UI
+
+# MCP Server
+servers:
+  generation: servers/generation
+
+# MCP Client Pipeline
+pipeline:
+- generation.generation_init
+- generation.multiturn_generate

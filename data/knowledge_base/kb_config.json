@@ -1,0 +1,32 @@
+{
+  "embedding": {
+    "api_key": "de6bd232780b4d1eb8fa1b7c207f730d.H7Iyq7gynz0DEwKt",
+    "base_url": "https://open.bigmodel.cn/api/paas/v4",
+    "model_name": "embedding-3"
+  },
+  "milvus": {
+    "uri": "tcp://127.0.0.1:19530",
+    "token": "",
+    "id_field_name": "id",
+    "vector_field_name": "vector",
+    "text_field_name": "contents",
+    "id_max_length": 64,
+    "text_max_length": 60000,
+    "metric_type": "IP",
+    "index_params": {
+      "index_type": "AUTOINDEX",
+      "metric_type": "IP"
+    },
+    "search_params": {
+      "metric_type": "IP",
+      "params": {}
+    },
+    "index_chunk_size": 1000
+  },
+  "chunk": {
+    "chunk_backend": "token",
+    "tokenizer_or_token_counter": "gpt2",
+    "chunk_size": 512,
+    "use_title": true
+  }
+}

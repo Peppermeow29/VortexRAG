@@ -1,0 +1,60 @@
+
+# Claude Code
+.claude/
+
+# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Output
+output/
+data/chat_sessions/
+
+# Frontend
+ui/frontend/node_modules/
+ui/frontend/.vite/
+ui/frontend/dist/
+
+# Temporary
+*.tmp
+*.bak
+*.backup
+

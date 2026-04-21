@@ -1,0 +1,41 @@
+benchmark:
+  benchmark:
+    key_map:
+      gt_ls: golden_answers
+      q_ls: question
+    limit: -1
+    name: nq
+    path: data/sample_nq_10.jsonl
+    seed: 42
+    shuffle: false
+generation:
+  backend: openai
+  backend_configs:
+    hf:
+      batch_size: 8
+      gpu_ids: 2,3
+      model_name_or_path: openbmb/MiniCPM4-8B
+      trust_remote_code: true
+    openai:
+      api_key: sk-zyQFGoNY6PEeLF5t9QcOx8TJtOnCSGla6poauvVrdb731pZS
+      base_delay: 1
+      base_url: https://api.moonshot.cn/v1
+      concurrency: 8
+      model_name: kimi-k2.5
+      retries: 3
+    vllm:
+      dtype: auto
+      gpu_ids: 2,3
+      gpu_memory_utilization: 0.9
+      model_name_or_path: openbmb/MiniCPM4-8B
+      trust_remote_code: true
+  extra_params:
+    chat_template_kwargs:
+      enable_thinking: false
+  sampling_params:
+    max_tokens: 2048
+    temperature: 1
+    top_p: 0.95
+  system_prompt: '你是一个专业的VortexRAG问答助手。请一定记住使用中文回答问题。'
+prompt:
+  template: prompt/qa_simple.jinja

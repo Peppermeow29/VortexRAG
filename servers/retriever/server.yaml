@@ -1,0 +1,79 @@
+path: servers/retriever/src/retriever.py
+parameter: servers/retriever/parameter.yaml
+tools:
+  retriever_init:
+    input:
+      model_name_or_path: $model_name_or_path
+      backend_configs: $backend_configs
+      batch_size: $batch_size
+      corpus_path: $corpus_path
+      gpu_ids: $gpu_ids
+      is_multimodal: $is_multimodal
+      backend: $backend
+      index_backend: $index_backend
+      index_backend_configs: $index_backend_configs
+      is_demo: $is_demo
+      collection_name: $collection_name
+  retriever_embed:
+    input:
+      embedding_path: $embedding_path
+      overwrite: $overwrite
+      is_multimodal: $is_multimodal
+  retriever_index:
+    input:
+      embedding_path: $embedding_path
+      overwrite: $overwrite
+      collection_name: $collection_name
+      corpus_path: $corpus_path
+  retriever_search:
+    input:
+      query_list: q_ls
+      top_k: $top_k
+      query_instruction: $query_instruction
+      collection_name: $collection_name
+    output:
+    - ret_psg
+  retriever_batch_search:
+    input:
+      batch_query_list: batch_query_list
+      top_k: $top_k
+      query_instruction: $query_instruction
+      collection_name: $collection_name
+    output:
+    - ret_psg_ls
+  bm25_index:
+    input:
+      overwrite: $overwrite
+  bm25_search:
+    input:
+      query_list: q_ls
+      top_k: $top_k
+    output:
+    - ret_psg
+  retriever_deploy_search:
+    input:
+      retriever_url: $retriever_url
+      query_list: q_ls
+      top_k: $top_k
+      query_instruction: $query_instruction
+    output:
+    - ret_psg
+  retriever_websearch:
+    input:
+      query_list: q_ls
+      top_k: $top_k
+      retrieve_thread_num: $retrieve_thread_num
+      websearch_backend: $websearch_backend
+      websearch_backend_configs: $websearch_backend_configs
+    output:
+    - ret_psg
+  retriever_batch_websearch:
+    input:
+      batch_query_list: batch_query_list
+      top_k: $top_k
+      retrieve_thread_num: $retrieve_thread_num
+      websearch_backend: $websearch_backend
+      websearch_backend_configs: $websearch_backend_configs
+    output:
+    - ret_psg_ls
+prompts: {}

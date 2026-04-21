@@ -1,0 +1,181 @@
+path: servers/prompt/src/prompt.py
+parameter: servers/prompt/parameter.yaml
+tools: {}
+prompts:
+  qa_boxed:
+    input:
+      q_ls: q_ls
+      template: $template
+    output:
+    - prompt_ls
+  qa_boxed_multiple_choice:
+    input:
+      q_ls: q_ls
+      choices_ls: choices_ls
+      template: $template
+    output:
+    - prompt_ls
+  qa_rag_boxed:
+    input:
+      q_ls: q_ls
+      ret_psg: ret_psg
+      template: $template
+    output:
+    - prompt_ls
+  qa_rag_boxed_multiple_choice:
+    input:
+      q_ls: q_ls
+      choices_ls: choices_ls
+      ret_psg: ret_psg
+      template: $template
+    output:
+    - prompt_ls
+  RankCoT_kr:
+    input:
+      q_ls: q_ls
+      ret_psg: ret_psg
+      template: $kr_template
+    output:
+    - prompt_ls
+  RankCoT_qa:
+    input:
+      q_ls: q_ls
+      kr_ls: kr_ls
+      template: $qa_template
+    output:
+    - prompt_ls
+  ircot_next_prompt:
+    input:
+      memory_q_ls: memory_q_ls
+      memory_ret_psg: memory_ret_psg
+      template: $template
+    output:
+    - prompt_ls
+  webnote_init_page:
+    input:
+      q_ls: q_ls
+      plan_ls: plan_ls
+      template: $webnote_init_page_template
+    output:
+    - prompt_ls
+  webnote_gen_plan:
+    input:
+      q_ls: q_ls
+      template: $webnote_gen_plan_template
+    output:
+    - prompt_ls
+  webnote_gen_subq:
+    input:
+      q_ls: q_ls
+      plan_ls: plan_ls
+      page_ls: page_ls
+      template: $webnote_gen_subq_template
+    output:
+    - prompt_ls
+  webnote_fill_page:
+    input:
+      q_ls: q_ls
+      plan_ls: plan_ls
+      page_ls: page_ls
+      subq_ls: subq_ls
+      psg_ls: psg_ls
+      template: $webnote_fill_page_template
+    output:
+    - prompt_ls
+  webnote_gen_answer:
+    input:
+      q_ls: q_ls
+      page_ls: page_ls
+      template: $webnote_gen_answer_template
+    output:
+    - prompt_ls
+  search_r1_gen:
+    input:
+      prompt_ls: prompt_ls
+      ans_ls: ans_ls
+      ret_psg: ret_psg
+      template: $search_r1_gen_template
+    output:
+    - prompt_ls
+  r1_searcher_gen:
+    input:
+      prompt_ls: prompt_ls
+      ans_ls: ans_ls
+      ret_psg: ret_psg
+      template: $r1_searcher_gen_template
+    output:
+    - prompt_ls
+  search_o1_init:
+    input:
+      q_ls: q_ls
+      template: $searcho1_reasoning_template
+    output:
+    - prompt_ls
+  search_o1_reasoning_indocument:
+    input:
+      extract_query_list: extract_query_list
+      ret_psg: ret_psg
+      total_reason_list: total_reason_list
+      template: $searcho1_refine_template
+    output:
+    - prompt_ls
+  search_o1_insert:
+    input:
+      q_ls: q_ls
+      total_subq_list: total_subq_list
+      total_final_info_list: total_final_info_list
+      template: $searcho1_reasoning_template
+    output:
+    - prompt_ls
+  gen_subq:
+    input:
+      q_ls: q_ls
+      ret_psg: ret_psg
+      template: gen_subq_template
+    output:
+    - prompt_ls
+  check_passages:
+    input:
+      q_ls: q_ls
+      ret_psg: ret_psg
+      template: check_psg_template
+    output:
+    - prompt_ls
+  evisrag_vqa:
+    input:
+      q_ls: q_ls
+      ret_psg: ret_psg
+      template: evisrag_template
+    output:
+    - prompt_ls
+  surveycpm_search:
+    input:
+      instruction_ls: instruction_ls
+      survey_ls: survey_ls
+      cursor_ls: cursor_ls
+      surveycpm_search_template: $surveycpm_search_template
+    output:
+    - prompt_ls
+  surveycpm_init_plan:
+    input:
+      instruction_ls: instruction_ls
+      retrieved_info_ls: retrieved_info_ls
+      surveycpm_init_plan_template: $surveycpm_init_plan_template
+    output:
+    - prompt_ls
+  surveycpm_write:
+    input:
+      instruction_ls: instruction_ls
+      survey_ls: survey_ls
+      cursor_ls: cursor_ls
+      retrieved_info_ls: retrieved_info_ls
+      surveycpm_write_template: $surveycpm_write_template
+    output:
+    - prompt_ls
+  surveycpm_extend_plan:
+    input:
+      instruction_ls: instruction_ls
+      survey_ls: survey_ls
+      surveycpm_extend_plan_template: $surveycpm_extend_plan_template
+    output:
+    - prompt_ls

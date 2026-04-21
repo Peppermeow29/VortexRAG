@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <defs>
+    <linearGradient id="l1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="white" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0.15"/>
+    </linearGradient>
+    <linearGradient id="l2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="white" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="l3" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="white" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0.1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="32" height="32" rx="8" fill="#111"/>
+
+  <!-- Edges radiating from center hub (15,15) -->
+  <line x1="15" y1="15" x2="8" y2="7"  stroke="url(#l1)" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="15" y1="15" x2="25" y2="8"  stroke="url(#l2)" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="15" y1="15" x2="26" y2="22" stroke="url(#l3)" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="15" y1="15" x2="9"  y2="24" stroke="url(#l1)" stroke-width="1.8" stroke-linecap="round"/>
+
+  <!-- Cross-link between two outer nodes -->
+  <line x1="8" y1="7" x2="25" y2="8" stroke="white" stroke-width="1" stroke-linecap="round" opacity="0.2"/>
+  <line x1="26" y1="22" x2="9" y2="24" stroke="white" stroke-width="1" stroke-linecap="round" opacity="0.2"/>
+
+  <!-- Outer nodes — varying sizes -->
+  <circle cx="8"  cy="7"  r="2.2" fill="white" opacity="0.9"/>
+  <circle cx="25" cy="8"  r="1.6" fill="white" opacity="0.7"/>
+  <circle cx="26" cy="22" r="2"   fill="white" opacity="0.8"/>
+  <circle cx="9"  cy="24" r="1.4" fill="white" opacity="0.6"/>
+
+  <!-- Center hub — offset slightly for asymmetry -->
+  <circle cx="15" cy="15" r="3.8" fill="white"/>
+</svg>

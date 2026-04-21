@@ -1,0 +1,87 @@
+<mxfile host="Electron" agent="Codex" version="29.6.6">
+  <diagram id="milvus-concept-model-ch4" name="Milvus 向量数据概念模型图">
+    <mxGraphModel dx="1500" dy="920" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="920" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="title" value="Milvus 向量数据概念模型图" style="text;html=1;strokeColor=none;fillColor=none;fontSize=24;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="420" y="25" width="660" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="subtitle" value="本图强调知识集合、向量记录与检索查询之间的组织关系，不按传统关系数据库 ER 模式表达" style="text;html=1;strokeColor=none;fillColor=none;fontSize=15;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="250" y="68" width="1000" height="26" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="source" value="Chunk Source&#xa;------------------------&#xa;来源文档&#xa;片段文本&#xa;分块序号" style="shape=umlClass;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="70" y="250" width="230" height="170" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="collection" value="Collection&#xa;------------------------&#xa;collection_name&#xa;display_name&#xa;schema&#xa;index_type = AUTOINDEX&#xa;metric_type = IP" style="shape=umlClass;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="520" y="130" width="290" height="220" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="record" value="Record&#xa;------------------------&#xa;id : VARCHAR&#xa;vector : FLOAT_VECTOR&#xa;contents : VARCHAR&#xa;metadata : dynamic field" style="shape=umlClass;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="520" y="470" width="290" height="220" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="metadata" value="Metadata&#xa;------------------------&#xa;doc_id&#xa;title&#xa;file_name&#xa;segment_id" style="shape=umlClass;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="980" y="500" width="240" height="170" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="query" value="Query&#xa;------------------------&#xa;用户问题&#xa;embedding(question)&#xa;top_k 相似检索" style="shape=umlClass;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="160" width="240" height="170" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="note1" value="说明：一个 Collection 对应一个知识集合，内部包含多条向量记录。" style="shape=note;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="860" y="120" width="220" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="note2" value="说明：vector 用于相似度检索，contents 用于生成阶段上下文组织。" style="shape=note;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="860" y="320" width="240" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="note3" value="说明：metadata 主要用于来源追溯，不采用传统外键约束表达。" style="shape=note;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="500" width="190" height="90" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e1" value="形成片段文本" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#000000;strokeWidth=2;fontSize=14;" edge="1" parent="1" source="source" target="record">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="380" y="335"/>
+              <mxPoint x="380" y="580"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="e2" value="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=2;endArrow=none;fontSize=16;" edge="1" parent="1" source="collection" target="record">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="665" y="350" as="sourcePoint"/>
+            <mxPoint x="665" y="470" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2label" value="n" style="text;html=1;strokeColor=none;fillColor=none;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="680" y="425" width="30" height="20" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e3" value="包含" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=diamondThin;strokeColor=#000000;strokeWidth=2;fontSize=14;" edge="1" parent="1" source="record" target="metadata">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e4" value="检索" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#000000;strokeWidth=2;fontSize=14;" edge="1" parent="1" source="query" target="collection">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1040" y="245"/>
+              <mxPoint x="1040" y="240"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="e5" value="返回 Top-K 记录" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#000000;strokeWidth=2;fontSize=14;" edge="1" parent="1" source="collection" target="query">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1040" y="275"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
