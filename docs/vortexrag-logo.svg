@@ -1,0 +1,38 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="240" fill="none" stroke="#E5E7EB" stroke-width="2"/>
+
+  <!-- Vortex spiral -->
+  <g transform="translate(256, 256)">
+    <!-- Outer spiral -->
+    <path d="M 0,-200 Q 200,-200 200,0 Q 200,200 0,200 Q -200,200 -200,0 Q -200,-200 0,-200"
+          fill="none" stroke="#2563EB" stroke-width="8" opacity="0.3"/>
+
+    <!-- Middle spiral -->
+    <path d="M 0,-140 Q 140,-140 140,0 Q 140,140 0,140 Q -140,140 -140,0 Q -140,-140 0,-140"
+          fill="none" stroke="#7C3AED" stroke-width="10" opacity="0.5"/>
+
+    <!-- Inner spiral -->
+    <path d="M 0,-80 Q 80,-80 80,0 Q 80,80 0,80 Q -80,80 -80,0 Q -80,-80 0,-80"
+          fill="none" stroke="#06B6D4" stroke-width="12" opacity="0.7"/>
+
+    <!-- Center circle -->
+    <circle cx="0" cy="0" r="40" fill="#2563EB"/>
+    <circle cx="0" cy="0" r="30" fill="#7C3AED"/>
+    <circle cx="0" cy="0" r="20" fill="#06B6D4"/>
+
+    <!-- Knowledge dots -->
+    <circle cx="100" cy="-100" r="8" fill="#2563EB" opacity="0.8"/>
+    <circle cx="140" cy="0" r="8" fill="#7C3AED" opacity="0.8"/>
+    <circle cx="100" cy="100" r="8" fill="#06B6D4" opacity="0.8"/>
+    <circle cx="-100" cy="100" r="8" fill="#2563EB" opacity="0.8"/>
+    <circle cx="-140" cy="0" r="8" fill="#7C3AED" opacity="0.8"/>
+    <circle cx="-100" cy="-100" r="8" fill="#06B6D4" opacity="0.8"/>
+  </g>
+
+  <!-- Connection lines -->
+  <line x1="156" y1="156" x2="256" y2="256" stroke="#2563EB" stroke-width="2" opacity="0.3"/>
+  <line x1="356" y1="156" x2="256" y2="256" stroke="#7C3AED" stroke-width="2" opacity="0.3"/>
+  <line x1="356" y1="356" x2="256" y2="256" stroke="#06B6D4" stroke-width="2" opacity="0.3"/>
+  <line x1="156" y1="356" x2="256" y2="256" stroke="#2563EB" stroke-width="2" opacity="0.3"/>
+</svg>
