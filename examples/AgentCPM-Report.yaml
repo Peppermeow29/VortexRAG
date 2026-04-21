@@ -19,7 +19,7 @@ pipeline:
 - custom.surveycpm_init_citation_registry
 - custom.surveycpm_state_init
 - loop:
-    times: 140
+    times: 2
     steps:
     - branch:
         router:

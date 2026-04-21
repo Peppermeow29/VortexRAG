@@ -1,7 +1,7 @@
 benchmark:
   benchmark:
     name: nq
-    path: data/chat_sessions/AgentCPM-Report_1776752865218.jsonl
+    path: data/chat_sessions/AgentCPM-Report_1776790862216.jsonl
     key_map:
       q_ls: question
       gt_ls: golden_answers
@@ -38,7 +38,7 @@ retriever:
   gpu_ids: '1'
   is_multimodal: false
   backend: openai
-  index_backend: faiss
+  index_backend: milvus
   index_backend_configs:
     faiss:
       index_use_gpu: true
@@ -87,7 +87,7 @@ generation:
   sampling_params:
     temperature: 0.7
     top_p: 0.8
-    max_tokens: 4096
+    max_tokens: 73448
   extra_params:
     chat_template_kwargs:
       enable_thinking: false

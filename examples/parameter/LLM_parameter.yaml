@@ -5,7 +5,7 @@ benchmark:
       q_ls: question
     limit: -1
     name: nq
-    path: data/sample_nq_10.jsonl
+    path: data/chat_sessions/LLM_1776771072901.jsonl
     seed: 42
     shuffle: false
 generation:
@@ -36,6 +36,6 @@ generation:
     max_tokens: 2048
     temperature: 1
     top_p: 0.95
-  system_prompt: '你是一个专业的VortexRAG问答助手。请一定记住使用中文回答问题。'
+  system_prompt: 你是一个专业的VortexRAG问答助手。请一定记住使用中文回答问题。
 prompt:
   template: prompt/qa_simple.jinja
