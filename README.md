@@ -91,8 +91,6 @@ pip install -e .
 vortexrag --help
 ```
 
-**📖 For detailed installation instructions, see [INSTALLATION.md](INSTALLATION.md)**
-
 ### Launch the Web UI
 
 ```bash
@@ -115,12 +113,6 @@ vortexrag run examples/RAG.yaml examples/parameter/RAG_parameter.yaml --is_demo
 ---
 
 ## 📖 Documentation
-
-### 📚 Complete Guides
-
-- **[Installation Guide](INSTALLATION.md)** - Detailed installation and configuration
-- **[Setup Guide](LOGO_AND_SETUP_GUIDE.md)** - Repository setup and branding
-- **[Rebranding Summary](REBRANDING_SUMMARY.md)** - Changes from UltraRAG
 
 ### Configuration
 
@@ -151,10 +143,46 @@ retriever:
 # Pull a model
 ollama pull llama3.1
 
+# Start Ollama service
+ollama serve
+
 # Configure VortexRAG to use Ollama
-# Edit your parameter file:
+# Edit examples/parameter/RAG_parameter.yaml:
 # model_name: llama3.1
 # base_url: http://localhost:11434/v1
+# api_key: ollama
+```
+
+### Troubleshooting
+
+**Issue: `vortexrag: command not found`**
+```bash
+pip install -e .
+```
+
+**Issue: Frontend not built**
+```bash
+cd ui/frontend
+npm install
+npm run build
+```
+
+**Issue: Model timeout**
+```yaml
+# Increase timeout in your parameter file
+generation:
+  backend_configs:
+    openai:
+      timeout: 900.0  # 15 minutes
+```
+
+**Issue: Ollama connection failed**
+```bash
+# Make sure Ollama is running
+ollama serve
+
+# Verify
+curl http://localhost:11434/api/tags
 ```
 
 ### Development Mode
