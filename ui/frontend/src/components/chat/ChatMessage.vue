@@ -734,66 +734,273 @@ onUnmounted(() => {
 }
 
 /* Inline code */
+/* Inline code */
 .msg-content :deep(code) {
   font-family: var(--font-mono);
   font-size: .85rem;
-  background: #f7f7fb;
+  background: rgba(175, 184, 193, 0.2);
+  border: 1px solid rgba(175, 184, 193, 0.3);
   border-radius: 6px;
-  padding: .15rem .35rem;
+  padding: .15rem .4rem;
+  color: var(--text-primary);
+}
+
+:root.dark .msg-content :deep(code),
+[data-theme=dark] .msg-content :deep(code) {
+  background: rgba(110, 118, 129, 0.2);
+  border-color: rgba(110, 118, 129, 0.3);
 }
 
 /* Code blocks */
 .msg-content :deep(pre) {
-  background: #1e1e1e;
-  color: #d4d4d4;
-  border-radius: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
   padding: 0;
   overflow: hidden;
-  margin: 10px 0;
+  margin: 12px 0;
   font-size: .82rem;
-  line-height: 1.5;
+  line-height: 1.6;
   contain: content;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease;
 }
+
+.msg-content :deep(pre:hover) {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+:root.dark .msg-content :deep(pre),
+[data-theme=dark] .msg-content :deep(pre) {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+:root.dark .msg-content :deep(pre:hover),
+[data-theme=dark] .msg-content :deep(pre:hover) {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
 .msg-content :deep(pre code) {
   display: block;
-  padding: 14px 16px;
+  padding: 16px 18px;
   background: none;
   overflow-x: auto;
   font-family: var(--font-mono);
   font-size: inherit;
-  color: inherit;
+  color: var(--text-primary);
+  line-height: 1.6;
 }
 
-/* ChatGPT-style code wrapper + copy */
+/* Smooth scrollbar for code blocks */
+.msg-content :deep(pre code::-webkit-scrollbar) {
+  height: 8px;
+}
+
+.msg-content :deep(pre code::-webkit-scrollbar-track) {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+.msg-content :deep(pre code::-webkit-scrollbar-thumb) {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.msg-content :deep(pre code::-webkit-scrollbar-thumb:hover) {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+:root.dark .msg-content :deep(pre code::-webkit-scrollbar-track),
+[data-theme=dark] .msg-content :deep(pre code::-webkit-scrollbar-track) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+:root.dark .msg-content :deep(pre code::-webkit-scrollbar-thumb),
+[data-theme=dark] .msg-content :deep(pre code::-webkit-scrollbar-thumb) {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+:root.dark .msg-content :deep(pre code::-webkit-scrollbar-thumb:hover),
+[data-theme=dark] .msg-content :deep(pre code::-webkit-scrollbar-thumb:hover) {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Syntax highlighting - Light theme */
+.msg-content :deep(pre code .hljs-comment),
+.msg-content :deep(pre code .hljs-quote) { color: #6a737d; font-style: italic; }
+.msg-content :deep(pre code .hljs-keyword),
+.msg-content :deep(pre code .hljs-selector-tag),
+.msg-content :deep(pre code .hljs-subst) { color: #d73a49; font-weight: 600; }
+.msg-content :deep(pre code .hljs-number),
+.msg-content :deep(pre code .hljs-literal),
+.msg-content :deep(pre code .hljs-variable),
+.msg-content :deep(pre code .hljs-template-variable),
+.msg-content :deep(pre code .hljs-tag .hljs-attr) { color: #005cc5; }
+.msg-content :deep(pre code .hljs-string),
+.msg-content :deep(pre code .hljs-doctag) { color: #032f62; }
+.msg-content :deep(pre code .hljs-title),
+.msg-content :deep(pre code .hljs-section),
+.msg-content :deep(pre code .hljs-selector-id) { color: #6f42c1; font-weight: 600; }
+.msg-content :deep(pre code .hljs-type),
+.msg-content :deep(pre code .hljs-class .hljs-title) { color: #22863a; font-weight: 600; }
+.msg-content :deep(pre code .hljs-tag),
+.msg-content :deep(pre code .hljs-name),
+.msg-content :deep(pre code .hljs-attribute) { color: #22863a; }
+.msg-content :deep(pre code .hljs-regexp),
+.msg-content :deep(pre code .hljs-link) { color: #032f62; }
+.msg-content :deep(pre code .hljs-symbol),
+.msg-content :deep(pre code .hljs-bullet) { color: #e36209; }
+.msg-content :deep(pre code .hljs-built_in),
+.msg-content :deep(pre code .hljs-builtin-name) { color: #005cc5; }
+.msg-content :deep(pre code .hljs-meta) { color: #6a737d; }
+
+/* Syntax highlighting - Dark theme */
+:root.dark .msg-content :deep(pre code .hljs-comment),
+:root.dark .msg-content :deep(pre code .hljs-quote),
+[data-theme=dark] .msg-content :deep(pre code .hljs-comment),
+[data-theme=dark] .msg-content :deep(pre code .hljs-quote) { color: #8b949e; }
+:root.dark .msg-content :deep(pre code .hljs-keyword),
+:root.dark .msg-content :deep(pre code .hljs-selector-tag),
+:root.dark .msg-content :deep(pre code .hljs-subst),
+[data-theme=dark] .msg-content :deep(pre code .hljs-keyword),
+[data-theme=dark] .msg-content :deep(pre code .hljs-selector-tag),
+[data-theme=dark] .msg-content :deep(pre code .hljs-subst) { color: #ff7b72; }
+:root.dark .msg-content :deep(pre code .hljs-number),
+:root.dark .msg-content :deep(pre code .hljs-literal),
+:root.dark .msg-content :deep(pre code .hljs-variable),
+:root.dark .msg-content :deep(pre code .hljs-template-variable),
+:root.dark .msg-content :deep(pre code .hljs-tag .hljs-attr),
+[data-theme=dark] .msg-content :deep(pre code .hljs-number),
+[data-theme=dark] .msg-content :deep(pre code .hljs-literal),
+[data-theme=dark] .msg-content :deep(pre code .hljs-variable),
+[data-theme=dark] .msg-content :deep(pre code .hljs-template-variable),
+[data-theme=dark] .msg-content :deep(pre code .hljs-tag .hljs-attr) { color: #79c0ff; }
+:root.dark .msg-content :deep(pre code .hljs-string),
+:root.dark .msg-content :deep(pre code .hljs-doctag),
+[data-theme=dark] .msg-content :deep(pre code .hljs-string),
+[data-theme=dark] .msg-content :deep(pre code .hljs-doctag) { color: #a5d6ff; }
+:root.dark .msg-content :deep(pre code .hljs-title),
+:root.dark .msg-content :deep(pre code .hljs-section),
+:root.dark .msg-content :deep(pre code .hljs-selector-id),
+[data-theme=dark] .msg-content :deep(pre code .hljs-title),
+[data-theme=dark] .msg-content :deep(pre code .hljs-section),
+[data-theme=dark] .msg-content :deep(pre code .hljs-selector-id) { color: #d2a8ff; }
+:root.dark .msg-content :deep(pre code .hljs-type),
+:root.dark .msg-content :deep(pre code .hljs-class .hljs-title),
+[data-theme=dark] .msg-content :deep(pre code .hljs-type),
+[data-theme=dark] .msg-content :deep(pre code .hljs-class .hljs-title) { color: #7ee787; }
+:root.dark .msg-content :deep(pre code .hljs-tag),
+:root.dark .msg-content :deep(pre code .hljs-name),
+:root.dark .msg-content :deep(pre code .hljs-attribute),
+[data-theme=dark] .msg-content :deep(pre code .hljs-tag),
+[data-theme=dark] .msg-content :deep(pre code .hljs-name),
+[data-theme=dark] .msg-content :deep(pre code .hljs-attribute) { color: #7ee787; }
+:root.dark .msg-content :deep(pre code .hljs-regexp),
+:root.dark .msg-content :deep(pre code .hljs-link),
+[data-theme=dark] .msg-content :deep(pre code .hljs-regexp),
+[data-theme=dark] .msg-content :deep(pre code .hljs-link) { color: #a5d6ff; }
+:root.dark .msg-content :deep(pre code .hljs-symbol),
+:root.dark .msg-content :deep(pre code .hljs-bullet),
+[data-theme=dark] .msg-content :deep(pre code .hljs-symbol),
+[data-theme=dark] .msg-content :deep(pre code .hljs-bullet) { color: #ffa657; }
+:root.dark .msg-content :deep(pre code .hljs-built_in),
+:root.dark .msg-content :deep(pre code .hljs-builtin-name),
+[data-theme=dark] .msg-content :deep(pre code .hljs-built_in),
+[data-theme=dark] .msg-content :deep(pre code .hljs-builtin-name) { color: #79c0ff; }
+:root.dark .msg-content :deep(pre code .hljs-meta),
+[data-theme=dark] .msg-content :deep(pre code .hljs-meta) { color: #8b949e; }
+
+/* Code block wrapper with header */
 .msg-content :deep(.code-block-wrapper) {
   position: relative;
   margin: 0 0 1rem;
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
   border: 1px solid var(--border-subtle);
   background: var(--bg-card);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease;
 }
+
+.msg-content :deep(.code-block-wrapper:hover) {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+:root.dark .msg-content :deep(.code-block-wrapper),
+[data-theme=dark] .msg-content :deep(.code-block-wrapper) {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+:root.dark .msg-content :deep(.code-block-wrapper:hover),
+[data-theme=dark] .msg-content :deep(.code-block-wrapper:hover) {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Code block header with language label and copy button */
+.msg-content :deep(.code-block-header) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.02);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+:root.dark .msg-content :deep(.code-block-header),
+[data-theme=dark] .msg-content :deep(.code-block-header) {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Language label */
+.msg-content :deep(.code-block-lang) {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: var(--font-mono);
+}
+
+/* Copy button */
 .msg-content :deep(.code-block-copy) {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  z-index: 3;
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 4px 8px;
+  padding: 4px 10px;
   border-radius: 6px;
   border: 1px solid var(--border-subtle);
-  background: rgba(255,255,255,.92);
-  color: #64748b;
-  font-size: .75rem;
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  font-weight: 500;
   cursor: pointer;
-  opacity: 0;
-  transition: opacity .2s, background .2s, color .2s;
+  transition: all 0.2s ease;
 }
-.msg-content :deep(.code-block-wrapper:hover .code-block-copy) { opacity: 1; }
-.msg-content :deep(.code-block-copy:hover) { background: rgba(0,0,0,.06); color: #334155; }
-.msg-content :deep(.code-block-copy.copied) { color: #16a34a; opacity: 1; }
+
+.msg-content :deep(.code-block-copy:hover) {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  border-color: var(--text-tertiary);
+}
+
+.msg-content :deep(.code-block-copy.copied) {
+  color: #16a34a;
+  border-color: #16a34a;
+}
+
+:root.dark .msg-content :deep(.code-block-copy.copied),
+[data-theme=dark] .msg-content :deep(.code-block-copy.copied) {
+  color: #22c55e;
+  border-color: #22c55e;
+}
+
+/* Remove wrapper's pre styling since it's now inside wrapper */
+.msg-content :deep(.code-block-wrapper pre) {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
 
 /* Table wrapper + copy (align original UI) */
 .msg-content :deep(.table-block-wrapper) {

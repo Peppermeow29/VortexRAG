@@ -56,16 +56,37 @@ function restoreMath(html, blocks) {
     })
 }
 
-// Configure marked with syntax highlighting
-marked.setOptions({
-  highlight: (code, lang) => {
-    if (lang && hljs.getLanguage(lang)) {
-      return hljs.highlight(code, { language: lang }).value
-    }
-    return hljs.highlightAuto(code).value
-  },
+// Configure marked with syntax highlighting using postprocess hook
+marked.use({
   breaks: true,
-  gfm: true
+  gfm: true,
+  hooks: {
+    postprocess(html) {
+      // Highlight code blocks by replacing <code class="language-xxx"> with highlighted version
+      return html.replace(
+        /<code class="language-(\w+)">([\s\S]*?)<\/code>/g,
+        (match, lang, code) => {
+          try {
+            // Decode HTML entities
+            const decodedCode = code
+              .replace(/&lt;/g, '<')
+              .replace(/&gt;/g, '>')
+              .replace(/&amp;/g, '&')
+              .replace(/&quot;/g, '"')
+              .replace(/&#39;/g, "'");
+
+            if (hljs.getLanguage(lang)) {
+              const highlighted = hljs.highlight(decodedCode, { language: lang }).value;
+              return `<code class="language-${lang}">${highlighted}</code>`;
+            }
+          } catch (e) {
+            console.error('[useMarkdown] Highlight error:', e);
+          }
+          return match;
+        }
+      );
+    }
+  }
 })
 
 function normalizeTableCellText(text) {
@@ -175,7 +196,7 @@ export function useMarkdown() {
   function enhance(container, labels = { copy: 'Copy', copied: 'Copied!', copyTable: 'Copy Table', copiedTable: 'Copied!' }) {
     if (!container) return
 
-    // Code blocks: add copy button wrapper (align original UI capability)
+    // Code blocks: add copy button wrapper + language label
     const pres = container.querySelectorAll('pre')
     pres.forEach(pre => {
       if (pre.closest('.code-block-wrapper')) return
@@ -185,6 +206,21 @@ export function useMarkdown() {
       const wrapper = document.createElement('div')
       wrapper.className = 'code-block-wrapper'
 
+      // Extract language from class (e.g., "language-cpp" -> "cpp")
+      const langMatch = code.className.match(/language-(\w+)/)
+      const language = langMatch ? langMatch[1] : null
+
+      // Create header with language label and copy button
+      const header = document.createElement('div')
+      header.className = 'code-block-header'
+
+      if (language) {
+        const langLabel = document.createElement('span')
+        langLabel.className = 'code-block-lang'
+        langLabel.textContent = language.toUpperCase()
+        header.appendChild(langLabel)
+      }
+
       const btn = document.createElement('button')
       btn.type = 'button'
       btn.className = 'code-block-copy'
@@ -193,11 +229,12 @@ export function useMarkdown() {
         e.stopPropagation()
         copyWithFeedback(code.innerText || '', btn, labels.copy, labels.copied)
       })
+      header.appendChild(btn)
 
       const parent = pre.parentNode
       if (!parent) return
       parent.insertBefore(wrapper, pre)
-      wrapper.appendChild(btn)
+      wrapper.appendChild(header)
       wrapper.appendChild(pre)
     })
 

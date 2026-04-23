@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Highlight.js Test</title>
+  <style>
+    body { padding: 20px; font-family: sans-serif; }
+    pre { background: #f5f5f5; padding: 15px; border-radius: 8px; }
+    code { font-family: 'Courier New', monospace; }
+
+    /* Test syntax highlighting styles */
+    .hljs-keyword { color: #d73a49; font-weight: 600; }
+    .hljs-string { color: #032f62; }
+    .hljs-number { color: #005cc5; }
+    .hljs-comment { color: #6a737d; font-style: italic; }
+    .hljs-type { color: #22863a; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <h1>Highlight.js Test</h1>
+
+  <h2>Original Code (no highlighting):</h2>
+  <pre><code id="original">#include &lt;stdio.h&gt;
+int main() {
+    printf("Hello");
+    return 0;
+}</code></pre>
+
+  <h2>After marked.parse (should have span tags):</h2>
+  <div id="marked-output"></div>
+
+  <h2>After DOMPurify (should still have span tags):</h2>
+  <div id="purified-output"></div>
+
+  <script type="module">
+    import { marked } from '/node_modules/marked/lib/marked.esm.js';
+    import hljs from '/node_modules/highlight.js/es/index.js';
+    import DOMPurify from '/node_modules/dompurify/dist/purify.es.mjs';
+
+    // Configure marked
+    marked.setOptions({
+      highlight: (code, lang) => {
+        if (lang && hljs.getLanguage(lang)) {
+          return hljs.highlight(code, { language: lang }).value;
+        }
+        return hljs.highlightAuto(code).value;
+      },
+      breaks: true,
+      gfm: true
+    });
+
+    const testCode = '```cpp\n#include <stdio.h>\nint main() {\n    printf("Hello");\n    return 0;\n}\n```';
+
+    // Test marked
+    const markedResult = marked.parse(testCode);
+    console.log('Marked result:', markedResult);
+    document.getElementById('marked-output').innerHTML = markedResult;
+
+    // Test DOMPurify
+    const purified = DOMPurify.sanitize(markedResult, {
+      ADD_ATTR: ['class', 'style'],
+      ALLOWED_TAGS: ['p','br','strong','em','code','pre','span','div'],
+      ALLOWED_ATTR: ['class', 'style'],
+      FORCE_BODY: false,
+    });
+    console.log('Purified result:', purified);
+    document.getElementById('purified-output').innerHTML = purified;
+  </script>
+</body>
+</html>
