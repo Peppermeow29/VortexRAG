@@ -16,7 +16,7 @@ from xml.etree import ElementTree as ET
 from fastmcp.exceptions import ToolError
 from PIL import Image
 from tqdm import tqdm
-from vortexrag.server import UltraRAG_MCP_Server
+from vortexrag.server import VortexRAG_MCP_Server
 
 
 def _validate_path(user_path: str, allowed_base: Optional[str] = None) -> Path:
@@ -60,7 +60,7 @@ def _validate_path(user_path: str, allowed_base: Optional[str] = None) -> Path:
             raise
         raise ValueError(f"Invalid path: {user_path}") from e
 
-app = UltraRAG_MCP_Server("corpus")
+app = VortexRAG_MCP_Server("corpus")
 
 
 @contextmanager

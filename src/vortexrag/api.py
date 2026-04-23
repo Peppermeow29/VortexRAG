@@ -28,7 +28,7 @@ class _CallWrapper:
         global _client, logger
         if _client is None:
             raise RuntimeError(
-                "[UltraRAG Error] ToolCall was used before `initialize()` was called."
+                "[VortexRAG Error] ToolCall was used before `initialize()` was called."
             )
         try:
             _ = _client.session
@@ -59,7 +59,7 @@ class _CallWrapper:
                 input_keys = list(input_param.keys())
             except (KeyError, TypeError) as e:
                 raise ValueError(
-                    f"[UltraRAG Error] Tool {self._tool} not found in server {self._server} configuration!"
+                    f"[VortexRAG Error] Tool {self._tool} not found in server {self._server} configuration!"
                 ) from e
 
         for k, v in list(input_param.items()):
@@ -73,7 +73,7 @@ class _CallWrapper:
 
         if len(args) > len(input_param):
             raise ValueError(
-                f"[UltraRAG Error] Expected at most {len(input_param)} positional args, got {len(args)}"
+                f"[VortexRAG Error] Expected at most {len(input_param)} positional args, got {len(args)}"
             )
         for pos, value in enumerate(args):
             key = input_keys[pos]
@@ -81,12 +81,12 @@ class _CallWrapper:
 
         for k, v in kwargs.items():
             if k not in input_param:
-                raise ValueError(f"[UltraRAG Error] Unexpected keyword arg: {k!r}")
+                raise ValueError(f"[VortexRAG Error] Unexpected keyword arg: {k!r}")
             input_param[k] = v
 
         missing = [k for k, v in input_param.items() if v is None]
         if missing:
-            raise ValueError(f"[UltraRAG Error] Missing value for key(s): {missing}")
+            raise ValueError(f"[VortexRAG Error] Missing value for key(s): {missing}")
         result = await self._client.call_tool(concated, input_param)
         return result.data if result else None
 
@@ -202,7 +202,7 @@ async def _pipeline_async(
     parameter_file: str,
     log_level: str = "error",
 ):
-    """Internal async helper that runs a full UltraRAG pipeline.
+    """Internal async helper that runs a full VortexRAG pipeline.
 
     Args:
         pipeline_file: Path to pipeline YAML file
@@ -222,7 +222,7 @@ def PipelineCall(
     parameter_file: str,
     log_level: str = "error",
 ):
-    """Run a full UltraRAG pipeline from Python.
+    """Run a full VortexRAG pipeline from Python.
 
     Similar to `ultrarag run`, but with an explicitly provided parameter file.
     Can be called synchronously or asynchronously based on event loop state.

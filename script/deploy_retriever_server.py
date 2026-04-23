@@ -47,7 +47,7 @@ class SearchResponse(BaseModel):
 
 
 
-fastapi_app = FastAPI(title="UltraRAG Retriever Service")
+fastapi_app = FastAPI(title="VortexRAG Retriever Service")
 
 retriever: Optional[Retriever] = None   
 retriever_cfg: Optional[Dict[str, Any]] = None

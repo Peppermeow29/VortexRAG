@@ -1,4 +1,4 @@
-"""UltraRAG CLI - Beautiful command-line interface."""
+"""VortexRAG CLI - Beautiful command-line interface."""
 
 import importlib.metadata
 import platform
@@ -41,7 +41,7 @@ STYLES = {
     "link": Style(color="#fb923c", underline=True),      # Orange link
 }
 
-# ASCII art logo - pixel block style (UltraRAG)
+# ASCII art logo - pixel block style (VortexRAG)
 ULTRARAG_LOGO = r"""
 ███   ███ ███    █████████ ████████    █████   ████████    █████    ███████
 ███   ███ ███       ███    ███   ███  ███ ███  ███   ███  ███ ███  ███   ███
@@ -183,7 +183,7 @@ def create_info_table(
     fastmcp_ver = get_version_safe("fastmcp")
     mcp_ver = get_version_safe("mcp")
 
-    table.add_row("◆", "UltraRAG", Text(f"v{ultrarag_ver}", style=STYLES["success"]))
+    table.add_row("◆", "VortexRAG", Text(f"v{ultrarag_ver}", style=STYLES["success"]))
     table.add_row("◇", "FastMCP", Text(f"v{fastmcp_ver}", style=STYLES["muted"]))
     table.add_row("◇", "MCP", Text(f"v{mcp_ver}", style=STYLES["muted"]))
     table.add_row("", "", "")
@@ -235,7 +235,7 @@ def make_server_banner(
     doc_url: str = "https://ultrarag.openbmb.cn/",
     compact: bool = False,
 ) -> Panel:
-    """Create a formatted banner panel for UltraRAG server.
+    """Create a formatted banner panel for VortexRAG server.
 
     Args:
         pipeline_name: Name of the pipeline
@@ -266,7 +266,7 @@ def make_server_banner(
 
     # Create panel with styled border
     ultrarag_ver = get_version_safe("ultrarag")
-    title = get_gradient_text(" UltraRAG ")
+    title = get_gradient_text(" VortexRAG ")
     title.append(f"v{ultrarag_ver} ", style=STYLES["muted"])
 
     return Panel(
@@ -292,7 +292,7 @@ def make_welcome_banner() -> Panel:
     welcome_text = Text()
     welcome_text.append("\n")
     welcome_text.append("  欢迎使用 ", style=STYLES["secondary"])
-    welcome_text.append(get_gradient_text("UltraRAG"))
+    welcome_text.append(get_gradient_text("VortexRAG"))
     welcome_text.append(" - 新一代 RAG 开发框架\n", style=STYLES["secondary"])
     welcome_text.append("\n")
     welcome_text.append("  使用 ", style=STYLES["muted"])

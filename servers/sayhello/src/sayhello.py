@@ -1,8 +1,8 @@
 from typing import Dict
 
-from vortexrag.server import UltraRAG_MCP_Server
+from vortexrag.server import VortexRAG_MCP_Server
 
-app = UltraRAG_MCP_Server("sayhello")
+app = VortexRAG_MCP_Server("sayhello")
 
 
 @app.tool(output="name->msg")

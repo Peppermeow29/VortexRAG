@@ -44,7 +44,7 @@ def get_logger(
     file handlers. Subsequent calls reuse the initialized configuration.
 
     Args:
-        name: Logger name (child logger of "UltraRAG" if not "UltraRAG")
+        name: Logger name (child logger of "VortexRAG" if not "VortexRAG")
         level: Log level as string or literal (default: "info")
         enable_rich_tracebacks: Whether to enable Rich traceback formatting
         log_file: Optional path to log file (default: timestamped file in logs/)
@@ -55,7 +55,7 @@ def get_logger(
     global _LOGGING_INITIALIZED, _LOGFILE_PATH
 
     lvl = _level_from_str(level)
-    base = logging.getLogger("UltraRAG")
+    base = logging.getLogger("VortexRAG")
 
     if not _LOGGING_INITIALIZED:
         os.makedirs("logs", exist_ok=True)
@@ -97,4 +97,4 @@ def get_logger(
         for h in base.handlers:
             h.setLevel(lvl)
 
-    return base if name == "UltraRAG" else base.getChild(name)
+    return base if name == "VortexRAG" else base.getChild(name)

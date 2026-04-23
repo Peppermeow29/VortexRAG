@@ -1,5 +1,5 @@
 # servers/corpus/parameter.yaml
-parse_file_path: data/UltraRAG.pdf
+parse_file_path: data/VortexRAG.pdf
 text_corpus_save_path: corpora/text.jsonl
 image_corpus_save_path: corpora/image.jsonl
 

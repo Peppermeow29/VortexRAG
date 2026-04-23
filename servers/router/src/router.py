@@ -1,10 +1,10 @@
 import re
 from typing import Any, Dict, List, Optional, Union
 
-from vortexrag.server import UltraRAG_MCP_Server
+from vortexrag.server import VortexRAG_MCP_Server
 
 
-app = UltraRAG_MCP_Server("router")
+app = VortexRAG_MCP_Server("router")
 
 
 def _check_eos_token(text: str, tokens: List[str]) -> bool:

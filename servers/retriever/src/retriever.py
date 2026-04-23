@@ -12,15 +12,15 @@ from PIL import Image
 import uuid
 
 from fastmcp.exceptions import ValidationError, NotFoundError, ToolError
-from vortexrag.server import UltraRAG_MCP_Server
+from vortexrag.server import VortexRAG_MCP_Server
 from index_backends import BaseIndexBackend, create_index_backend
 from websearch_backends import create_websearch_backend
 
-app = UltraRAG_MCP_Server("retriever")
+app = VortexRAG_MCP_Server("retriever")
 
 
 class Retriever:
-    def __init__(self, mcp_inst: UltraRAG_MCP_Server):
+    def __init__(self, mcp_inst: VortexRAG_MCP_Server):
         mcp_inst.tool(
             self.retriever_init,
             output="model_name_or_path,backend_configs,batch_size,corpus_path,gpu_ids,is_multimodal,backend,index_backend,index_backend_configs,is_demo,collection_name->None",

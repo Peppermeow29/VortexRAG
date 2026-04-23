@@ -3,9 +3,9 @@ import json
 import copy
 from typing import List, Dict, Any
 
-from vortexrag.server import UltraRAG_MCP_Server
+from vortexrag.server import VortexRAG_MCP_Server
 
-app = UltraRAG_MCP_Server("custom")
+app = VortexRAG_MCP_Server("custom")
 
 
 @app.tool(output="ans_ls->extract_query_list")

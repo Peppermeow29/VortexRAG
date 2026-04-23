@@ -5,13 +5,13 @@ from typing import Any, Dict, List, Optional, Union
 import aiohttp
 from tqdm import tqdm
 
-from vortexrag.server import UltraRAG_MCP_Server
+from vortexrag.server import VortexRAG_MCP_Server
 
-app = UltraRAG_MCP_Server("reranker")
+app = VortexRAG_MCP_Server("reranker")
 
 
 class Reranker:
-    def __init__(self, mcp_inst: UltraRAG_MCP_Server):
+    def __init__(self, mcp_inst: VortexRAG_MCP_Server):
         mcp_inst.tool(
             self.reranker_init,
             output="model_name_or_path,backend_configs,batch_size,gpu_ids,backend->None",

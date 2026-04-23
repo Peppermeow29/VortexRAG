@@ -12,9 +12,9 @@ import base64
 import mimetypes
 
 from fastmcp.exceptions import ToolError
-from vortexrag.server import UltraRAG_MCP_Server
+from vortexrag.server import VortexRAG_MCP_Server
 
-app = UltraRAG_MCP_Server("generation")
+app = VortexRAG_MCP_Server("generation")
 httpx_logger.setLevel(logging.WARNING)
 
 
@@ -46,7 +46,7 @@ def _suppress_vllm_logging():
 
 
 class Generation:
-    def __init__(self, mcp_inst: UltraRAG_MCP_Server):
+    def __init__(self, mcp_inst: VortexRAG_MCP_Server):
         mcp_inst.tool(
             self.generation_init,
             output="backend_configs,sampling_params,extra_params,backend->None",

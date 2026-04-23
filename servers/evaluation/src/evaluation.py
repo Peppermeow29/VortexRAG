@@ -10,9 +10,9 @@ from typing import Any, Callable, Dict, List, Optional
 from rouge_score import rouge_scorer
 from tabulate import tabulate
 
-from vortexrag.server import UltraRAG_MCP_Server
+from vortexrag.server import VortexRAG_MCP_Server
 
-app = UltraRAG_MCP_Server("evaluation")
+app = VortexRAG_MCP_Server("evaluation")
 
 # Initialize the Rouge scorer for ROUGE metrics
 _rouge_scorer = rouge_scorer.RougeScorer(

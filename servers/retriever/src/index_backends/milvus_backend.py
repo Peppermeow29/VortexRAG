@@ -166,7 +166,7 @@ class MilvusIndexBackend(BaseIndexBackend):
         schema = MilvusClient.create_schema(
             auto_id=False,
             enable_dynamic_field=True,
-            description=f"UltraRAG KB | display_name={self.collection_display_name or collection_name}",
+            description=f"VortexRAG KB | display_name={self.collection_display_name or collection_name}",
         )
 
         schema.add_field(

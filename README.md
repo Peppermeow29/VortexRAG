@@ -19,7 +19,7 @@
 
 ## 🌟 What is VortexRAG?
 
-**VortexRAG** is a production-ready Retrieval-Augmented Generation (RAG) framework that bridges the gap between large language models and your knowledge base. Built on the foundation of [UltraRAG](https://github.com/OpenBMB/UltraRAG), VortexRAG enhances the original with custom improvements, unified architecture, and production-grade features.
+**VortexRAG** is a production-ready Retrieval-Augmented Generation (RAG) framework that bridges the gap between large language models and your knowledge base. Built on the foundation of [VortexRAG](https://github.com/OpenBMB/VortexRAG), VortexRAG enhances the original with custom improvements, unified architecture, and production-grade features.
 
 ### Why VortexRAG?
 
@@ -364,9 +364,9 @@ VortexRAG has been tested on various RAG benchmarks:
 
 ## 🙏 Acknowledgments
 
-VortexRAG is built on the foundation of [UltraRAG](https://github.com/OpenBMB/UltraRAG) by the OpenBMB team. We're grateful for their excellent work in creating a modular and extensible RAG framework.
+VortexRAG is built on the foundation of [VortexRAG](https://github.com/OpenBMB/VortexRAG) by the OpenBMB team. We're grateful for their excellent work in creating a modular and extensible RAG framework.
 
-**Original UltraRAG Authors:** OpenBMB Team  
+**Original VortexRAG Authors:** OpenBMB Team  
 **VortexRAG Maintainer:** [Peppermeow29](https://github.com/Peppermeow29)
 
 ---
@@ -381,7 +381,7 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE.txt](LI
 
 - **GitHub:** https://github.com/Peppermeow29/VortexRAG
 - **Issues:** https://github.com/Peppermeow29/VortexRAG/issues
-- **Original UltraRAG:** https://github.com/OpenBMB/UltraRAG
+- **Original VortexRAG:** https://github.com/OpenBMB/VortexRAG
 
 ---
 

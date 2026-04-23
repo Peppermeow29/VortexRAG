@@ -30,8 +30,8 @@ DuplicateBehavior = Literal["warn", "error", "replace", "ignore"]
 Transport = Literal["stdio", "http", "sse", "streamable-http"]
 
 
-class UltraRAG_MCP_Server(FastMCP):
-    """Extended FastMCP server with UltraRAG-specific features.
+class VortexRAG_MCP_Server(FastMCP):
+    """Extended FastMCP server with VortexRAG-specific features.
 
     Provides additional functionality for tool/prompt metadata tracking,
     configuration loading, and server.yaml generation.
@@ -73,10 +73,10 @@ class UltraRAG_MCP_Server(FastMCP):
         json_response: Optional[bool] = None,
         stateless_http: Optional[bool] = None,
     ) -> None:
-        """Initialize UltraRAG MCP server.
+        """Initialize VortexRAG MCP server.
 
         Args:
-            name: Server name (default: "UltraRAG")
+            name: Server name (default: "VortexRAG")
             instructions: Server instructions
             version: Server version
             auth: OAuth provider for authentication
@@ -104,7 +104,7 @@ class UltraRAG_MCP_Server(FastMCP):
             json_response: Use JSON response format
             stateless_http: Enable stateless HTTP mode
         """
-        name = name or "UltraRAG"
+        name = name or "VortexRAG"
         level = os.environ.get("log_level", "warn")
         self.logger = get_logger(name, level)
         # FastMCP 3.x removed/renamed some __init__ parameters (e.g., resource_prefix_format)
@@ -187,7 +187,7 @@ class UltraRAG_MCP_Server(FastMCP):
         enabled: Optional[bool] = None,
         **extra_kwargs: Any,
     ) -> Any:
-        """Register a tool with UltraRAG-specific output annotation support.
+        """Register a tool with VortexRAG-specific output annotation support.
 
         Args:
             name_or_fn: Tool name or function
@@ -255,7 +255,7 @@ class UltraRAG_MCP_Server(FastMCP):
         tags: Optional[set[str]] = None,
         enabled: Optional[bool] = None,
     ) -> Any:
-        """Register a prompt with UltraRAG-specific output annotation support.
+        """Register a prompt with VortexRAG-specific output annotation support.
 
         Args:
             name_or_fn: Prompt name or function

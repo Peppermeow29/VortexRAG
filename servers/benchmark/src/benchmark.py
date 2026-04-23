@@ -6,10 +6,10 @@ from typing import Any, Dict, List
 import pandas as pd
 
 from fastmcp.exceptions import NotFoundError, ToolError
-from vortexrag.server import UltraRAG_MCP_Server
+from vortexrag.server import VortexRAG_MCP_Server
 
 
-app = UltraRAG_MCP_Server("benchmark")
+app = VortexRAG_MCP_Server("benchmark")
 
 
 def _load_data_from_file(

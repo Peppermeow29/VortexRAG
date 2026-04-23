@@ -8,10 +8,10 @@ from jinja2.sandbox import SandboxedEnvironment
 from markupsafe import escape
 
 from fastmcp.prompts import PromptMessage
-from vortexrag.server import UltraRAG_MCP_Server
+from vortexrag.server import VortexRAG_MCP_Server
 
 
-app = UltraRAG_MCP_Server("prompt")
+app = VortexRAG_MCP_Server("prompt")
 
 # Create a sandboxed Jinja2 environment for security
 _sandboxed_env = SandboxedEnvironment(autoescape=True)
