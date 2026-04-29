@@ -19,7 +19,7 @@
 
 ## 🌟 What is VortexRAG?
 
-**VortexRAG** is a production-ready Retrieval-Augmented Generation (RAG) framework that bridges the gap between large language models and your knowledge base. Built on the foundation of [VortexRAG](https://github.com/OpenBMB/VortexRAG), VortexRAG enhances the original with custom improvements, unified architecture, and production-grade features.
+**VortexRAG** is a production-ready Retrieval-Augmented Generation (RAG) framework that bridges the gap between large language models and your knowledge base. Built on the foundation of [UltraRAG](https://github.com/OpenBMB/UltraRAG), VortexRAG enhances the original with custom improvements, unified architecture, and production-grade features.
 
 ### Why VortexRAG?
 
